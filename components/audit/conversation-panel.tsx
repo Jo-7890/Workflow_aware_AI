@@ -28,13 +28,15 @@ const copy = {
     rounds: "rounds",
     caseBrief: "Case brief",
     caseTitle: "Should Mr. Chan accept Medilight-X for persistent fatigue?",
-    caseDescription: "Mr. Chan is 68 years old. He has long-term fatigue, mild insomnia, and controlled hypertension. A new treatment claims to improve energy and sleep, but the evidence may be incomplete.",
-    imageAlt: "Illustration of an older adult considering a health treatment",
+    caseDescription:
+      "Mr. Chan is 68 years old. He has long-term fatigue, mild insomnia, and controlled hypertension. A new treatment claims to improve energy and sleep, but the evidence may be incomplete.",
+    imageAlt: "Illustration of an older man having poor sleep at night",
     assistant: "AI Assistant",
     you: "You",
     limitReached: "Dialogue limit reached.",
     placeholder: "Ask the AI about the case, evidence, safety, or alternatives...",
-    helper: "Complete at least 3 rounds before making the initial decision. The current demo uses fixed AI replies and stops at 10 user turns.",
+    helper:
+      "Complete at least 3 rounds before making the initial decision. The current demo uses fixed AI replies and stops at 10 user turns.",
     send: "Send message",
   },
   zh: {
@@ -42,8 +44,9 @@ const copy = {
     rounds: "轮对话",
     caseBrief: "案例简介",
     caseTitle: "陈先生是否应该接受 Medilight-X 来改善长期疲劳？",
-    caseDescription: "陈先生今年 68 岁，已有长期疲劳、轻度失眠，并且有控制稳定的高血压。一种新的治疗方式声称可以改善精力和睡眠，但相关证据可能并不完整。",
-    imageAlt: "一位长者正在考虑健康治疗的插图",
+    caseDescription:
+      "陈先生今年 68 岁，已有长期疲劳、轻度失眠，并且有控制稳定的高血压。一种新的治疗方式声称可以改善精力和睡眠，但相关证据可能并不完整。",
+    imageAlt: "一位老年男性夜间睡眠不佳的插图",
     assistant: "AI 助手",
     you: "你",
     limitReached: "已达到对话轮数上限。",
@@ -105,19 +108,30 @@ export function ConversationPanel({ language, turns, userRounds, maxRounds, onSe
             <li key={`${turn.time}-${i}`} className={cn("flex flex-col gap-1", turn.role === "user" && "items-end")}>
               {turn.role === "assistant" && (
                 <div className="flex items-center gap-1.5 text-xs">
-                  <span className="flex size-5 items-center justify-center rounded-full bg-muted text-muted-foreground"><Bot className="size-3" /></span>
+                  <span className="flex size-5 items-center justify-center rounded-full bg-muted text-muted-foreground">
+                    <Bot className="size-3" />
+                  </span>
                   <span className="font-medium text-foreground">{t.assistant}</span>
                   <span className="text-muted-foreground">{turn.time}</span>
                 </div>
               )}
               {turn.role === "user" && (
                 <div className="flex items-center gap-1.5 text-xs">
-                  <span className="flex size-5 items-center justify-center rounded-full bg-accent text-primary"><UserRound className="size-3" /></span>
+                  <span className="flex size-5 items-center justify-center rounded-full bg-accent text-primary">
+                    <UserRound className="size-3" />
+                  </span>
                   <span className="font-medium text-foreground">{t.you}</span>
                   <span className="text-muted-foreground">{turn.time}</span>
                 </div>
               )}
-              <p className={cn("max-w-[88%] text-pretty whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed", turn.role === "user" ? "rounded-tr-sm bg-accent text-foreground" : "rounded-tl-sm bg-muted text-foreground")}>{displayText}</p>
+              <p
+                className={cn(
+                  "max-w-[88%] text-pretty whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed",
+                  turn.role === "user" ? "rounded-tr-sm bg-accent text-foreground" : "rounded-tl-sm bg-muted text-foreground",
+                )}
+              >
+                {displayText}
+              </p>
             </li>
           )
         })}
@@ -139,7 +153,14 @@ export function ConversationPanel({ language, turns, userRounds, maxRounds, onSe
             placeholder={reachedLimit ? t.limitReached : t.placeholder}
             className="min-h-12 flex-1 resize-none bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
           />
-          <Button type="button" size="icon" onClick={handleSend} disabled={!value.trim() || reachedLimit} aria-label={t.send} className="mt-auto size-10">
+          <Button
+            type="button"
+            size="icon"
+            onClick={handleSend}
+            disabled={!value.trim() || reachedLimit}
+            aria-label={t.send}
+            className="mt-auto size-10"
+          >
             <Send className="size-4" />
           </Button>
         </div>

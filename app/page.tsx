@@ -6,7 +6,6 @@ import { WorkflowHeader } from "@/components/audit/workflow-header"
 import { ConversationPanel, type Language, type Turn } from "@/components/audit/conversation-panel"
 import { InitialDecision, type DecisionResult } from "@/components/audit/initial-decision"
 import { TopCheck } from "@/components/audit/top-check"
-import { ChecklistSummary } from "@/components/audit/checklist-summary"
 import { FinalDecision } from "@/components/audit/final-decision"
 
 const MAX_DIALOGUE_ROUNDS = 10
@@ -131,7 +130,7 @@ export default function Page() {
         finalUnlocked={hasPostReviewDialogue}
         finalSubmitted={finalSubmitted}
       />
-      <div className={`mx-auto grid max-w-6xl items-start gap-5 px-4 py-5 lg:px-6 ${reviewReady ? "lg:grid-cols-2" : "justify-center lg:grid-cols-[minmax(0,760px)]"}`}>
+      <div className={`mx-auto grid max-w-6xl items-stretch gap-5 px-4 py-5 lg:px-6 ${reviewReady ? "lg:grid-cols-2" : "justify-center lg:grid-cols-[minmax(0,760px)]"}`}>
         <div className="flex h-full flex-col gap-5">
           <ConversationPanel language={language} turns={turns} userRounds={userRounds} maxRounds={MAX_DIALOGUE_ROUNDS} onSend={sendToConversation} />
           {!reviewReady && (
@@ -156,9 +155,8 @@ export default function Page() {
           {reviewReady && hasPostReviewDialogue && <FinalDecision language={language} onConfirm={setFinalDecision} />}
         </div>
         {reviewReady && decision && (
-          <div className="flex h-full flex-col gap-5">
+          <div className="flex h-full flex-col">
             <TopCheck language={language} decision={decision} userRounds={userRounds} maxRounds={MAX_DIALOGUE_ROUNDS} onAskFollowUp={sendToConversation} />
-            <ChecklistSummary language={language} />
           </div>
         )}
       </div>
